@@ -1,0 +1,86 @@
+-- ----------------------------
+-- Table structure for douyu_cate
+-- ----------------------------
+DROP TABLE IF EXISTS `douyu_cate`;
+CREATE TABLE `douyu_cate` (
+  `cate_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分类id',
+  `game_name` varchar(20) DEFAULT NULL COMMENT '分类名称',
+  `short_name` varchar(20) DEFAULT NULL COMMENT '分类别名',
+  `game_url` varchar(255) DEFAULT NULL COMMENT '分类地址',
+  `game_src` varchar(255) DEFAULT NULL COMMENT '分类图片地址',
+  `game_icon` varchar(255) DEFAULT NULL COMMENT '分类小图标地址',
+  `create_time` datetime DEFAULT NULL,
+  `change_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`cate_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for douyu_danmu
+-- ----------------------------
+DROP TABLE IF EXISTS `douyu_danmu`;
+CREATE TABLE `douyu_danmu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `room_id` int(11) DEFAULT NULL,
+  `room_name` varchar(255) DEFAULT NULL,
+  `danmu_type` varchar(15) DEFAULT NULL,
+  `danmu_type_name` varchar(10) DEFAULT NULL,
+  `danmu_id` varchar(40) DEFAULT NULL,
+  `danmu_content` varchar(50) DEFAULT NULL,
+  `zhubo_name` varchar(30) DEFAULT NULL,
+  `sender_id` int(11) DEFAULT NULL,
+  `sender_name` varchar(30) DEFAULT NULL,
+  `sender_level` int(11) DEFAULT NULL,
+  `gift_id` int(11) DEFAULT NULL,
+  `gift_name` varchar(255) DEFAULT NULL,
+  `gift_style` varchar(10) DEFAULT NULL,
+  `gift_count` int(11) DEFAULT NULL,
+  `redirect_room_id` int(11) DEFAULT NULL,
+  `guangbo_style` int(10) DEFAULT NULL,
+  `guangbo_style_name` varchar(10) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46071 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for douyu_gift
+-- ----------------------------
+DROP TABLE IF EXISTS `douyu_gift`;
+CREATE TABLE `douyu_gift` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gift_id` int(11) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL COMMENT '礼物名称',
+  `type` tinyint(4) DEFAULT NULL COMMENT '礼物类型 1:鱼丸礼物 2:鱼翅礼物',
+  `pc` varchar(10) DEFAULT NULL COMMENT '价格 ',
+  `gx` varchar(10) DEFAULT NULL COMMENT '贡献值',
+  `desc` varchar(50) DEFAULT NULL COMMENT '礼物描述',
+  `intro` varchar(50) DEFAULT NULL COMMENT '礼物介绍',
+  `mimg` varchar(255) DEFAULT NULL COMMENT '礼物图片静态地址',
+  `himg` varchar(255) DEFAULT NULL COMMENT '礼物图片动态地址',
+  `create_time` datetime DEFAULT NULL,
+  `change_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for douyu_room
+-- ----------------------------
+DROP TABLE IF EXISTS `douyu_room`;
+CREATE TABLE `douyu_room` (
+  `room_id` int(11) NOT NULL AUTO_INCREMENT,
+  `room_thumb` varchar(255) DEFAULT NULL COMMENT '房间图片',
+  `cate_id` int(20) DEFAULT NULL COMMENT '分类id',
+  `cate_name` varchar(30) DEFAULT NULL COMMENT '分类名称',
+  `room_name` varchar(50) DEFAULT NULL COMMENT '房间名称',
+  `room_status` tinyint(4) DEFAULT NULL COMMENT '开播状态,1:开播 2:未开播',
+  `start_time` datetime DEFAULT NULL COMMENT '最近一次开播时间',
+  `owner_name` varchar(30) DEFAULT NULL COMMENT '主播名称',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '主播头像',
+  `online` int(255) DEFAULT NULL COMMENT '在线人数',
+  `owner_weight` double(12,4) DEFAULT NULL COMMENT '主播体重',
+  `weight_type` tinyint(4) DEFAULT '1' COMMENT '1:吨 2:千克',
+  `fans_num` int(11) DEFAULT NULL COMMENT '房间关注人数',
+  `gift` varchar(500) DEFAULT NULL COMMENT '礼物json串',
+  `create_time` datetime DEFAULT NULL,
+  `change_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`room_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3290853 DEFAULT CHARSET=utf8mb4;
