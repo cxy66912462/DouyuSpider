@@ -30,19 +30,20 @@ class DouyuRoomItem(scrapy.Item):
     owner_name= scrapy.Field()
     avatar= scrapy.Field()
     online= scrapy.Field()
+    hn= scrapy.Field()
     owner_weight= scrapy.Field()
     fans_num= scrapy.Field()
 
     def get_insert_sql(self):
         insert_sql = '''
             INSERT INTO douyu_room (room_id,room_thumb,cate_id,cate_name,room_name,room_status,start_time,
-            owner_name,avatar,online,owner_weight,fans_num,create_time,weight_type)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW(),%s)
+            owner_name,avatar,online,owner_weight,fans_num,create_time,weight_type,hn)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,NOW(),%s,%s)
             ON DUPLICATE KEY UPDATE room_thumb=VALUES(room_thumb),cate_id=VALUES(cate_id)
             ,cate_name=VALUES(cate_name),room_name=VALUES(room_name),room_status=VALUES(room_status)
             ,start_time=VALUES(start_time),owner_name=VALUES(owner_name),avatar=VALUES(avatar)
             ,online=VALUES(online),owner_weight=VALUES(owner_weight),fans_num=VALUES(fans_num)
-            ,weight_type=VALUES(weight_type)
+            ,weight_type=VALUES(weight_type),max_hn=VALUES(GREATEST(max_hn,hn))
         '''
         #(^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$)|(^[1-9]\d*|0$)
         owner_weight = self["owner_weight"]

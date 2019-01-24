@@ -2,12 +2,12 @@
 #@author: chaoxingyu
 #@file: MySqlUtil.py
 #@time: 2017/9/14 13:51
-import MySQLdb
+import pymysql
 import time
 
 class MySqlConnect(object):
 
-    def __init__(self,host='localhost',port=3306,user='root',password='root',dbname='scrapy_db'):
+    def __init__(self,host='localhost',port=3306,user='root',password='qweasdzxc',dbname='scrapy_douyu'):
         self.host = host
         self.port = port
         self.user = user
@@ -17,7 +17,7 @@ class MySqlConnect(object):
     def connect(self):
         try:
             log('开始创建连接')
-            self.connect = MySQLdb.connect(host=self.host,port=self.port,user=self.user,passwd=self.password,db=self.dbname,charset="utf8")
+            self.connect = pymysql.connect(host=self.host,port=self.port,user=self.user,passwd=self.password,db=self.dbname,charset="utf8")
             cursor = self.connect.cursor()
             self.cursor = cursor
             log('成功创建连接')

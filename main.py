@@ -10,3 +10,6 @@ import re
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 execute(['scrapy','crawl','douyu'])
 
+# arg = int(1).__str__()
+# if arg and isinstance(arg, str) != True:
+#     raise TypeError("Cannot mix str and non-str arguments")

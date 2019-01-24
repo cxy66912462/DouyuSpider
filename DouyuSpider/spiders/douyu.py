@@ -29,8 +29,8 @@ class DouyuSpider(scrapy.Spider):
                 cate_item = item_loader.load_item()
                 # 字典记录分类offset
                 self.cate_offset[cate_info['cate_id']] = 0
-                #yield cate_item
-                cate_url = parse.urljoin(self.room_list_url, cate_info['cate_id'])
+               # yield cate_item
+                cate_url = parse.urljoin(self.room_list_url, str(cate_info['cate_id']))
                 yield Request(url=cate_url, meta={'cate_id':cate_info['cate_id']},callback=self.parse_room_list,dont_filter = True)
             pass
         else:
@@ -54,6 +54,8 @@ class DouyuSpider(scrapy.Spider):
             item_loader.add_value('online', room_info['online'])
             item_loader.add_value('owner_weight', room_info['owner_weight'])
             item_loader.add_value('fans_num', room_info['fans_num'])
+            print(room_info['hn'])
+            item_loader.add_value('hn', room_info['hn'])
             room_item = item_loader.load_item()
             yield room_item
         else:
@@ -68,11 +70,11 @@ class DouyuSpider(scrapy.Spider):
         if json_data['error'] == 0 and len(json_data['data'])>0:
             for room_info in room_info_list:
                 # print(parse.urljoin(self.room_detail_url,room_info['room_id']))
-                yield Request(url=parse.urljoin(self.room_detail_url,room_info['room_id']),callback=self.parse_room_info,dont_filter=True)
+                yield Request(url=parse.urljoin(self.room_detail_url,str(room_info['room_id'])),callback=self.parse_room_info,dont_filter=True)
             if len(json_data['data'])>=30:
                 self.cate_offset[cate_id] = self.cate_offset[cate_id]+30
                 offset = self.cate_offset[cate_id]
-                cate_url = parse.urljoin(self.room_list_url, cate_id) +'?offset='+str(offset)
+                cate_url = parse.urljoin(self.room_list_url, str(cate_id)) +'?offset='+str(offset)
                 yield Request(url=cate_url, meta={'cate_id': cate_id}, callback=self.parse_room_list,
                               dont_filter=True)
         else:

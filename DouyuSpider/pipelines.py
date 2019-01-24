@@ -4,8 +4,9 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import MySQLdb
-import MySQLdb.cursors
+# import MySQLdb
+# import MySQLdb.cursors
+import pymysql
 from twisted.enterprise import adbapi
 
 class DouyuspiderPipeline(object):
@@ -26,10 +27,10 @@ class MysqlTwistedPipeline(object):
             user=settings['MYSQL_USER'],
             password=settings['MYSQL_PASSWORD'],
             charset = 'utf8',
-            cursorclass = MySQLdb.cursors.DictCursor,
+            cursorclass = pymysql.cursors.DictCursor,
             use_unicode = True
         )
-        dbpool = adbapi.ConnectionPool('MySQLdb',**dbparams)
+        dbpool = adbapi.ConnectionPool('pymysql',**dbparams)
         return cls(dbpool)
 
     # 使用twisted将mysql插入变成异步执行

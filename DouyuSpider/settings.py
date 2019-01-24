@@ -93,9 +93,9 @@ ITEM_PIPELINES = {
 
 # Mysql配置
 MYSQL_HOST = 'localhost'
-MYSQL_DBNAME = 'scrapy_db'
+MYSQL_DBNAME = 'scrapy_douyu'
 MYSQL_USER = 'root'
-MYSQL_PASSWORD = 'root'
+MYSQL_PASSWORD = 'qweasdzxc'
 # 日期格式
 SQL_DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 SQL_DATE_FORMAT = '%Y-%m-%d'
