@@ -54,8 +54,6 @@ class DouyuSpider(scrapy.Spider):
             item_loader.add_value('online', room_info['online'])
             item_loader.add_value('owner_weight', room_info['owner_weight'])
             item_loader.add_value('fans_num', room_info['fans_num'])
-            print(room_info['hn'])
-            item_loader.add_value('hn', room_info['hn'])
             room_item = item_loader.load_item()
             yield room_item
         else:
